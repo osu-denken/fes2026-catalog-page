@@ -1,53 +1,333 @@
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--card: #112517;
+	--card-hover: #152e1d;
+
+	--border: #2a4834;
+	--border-hover: #72e08f;
+
+	--text: #f5fbf7;
+	--subtext: #aec8b7;
+
+	--accent: #72e08f;
+	--accent-dark: #18402b;
+
+	--member: #b9ffa1;
+	--member-dark: #304b26;
+}
+
+html {
+	min-height: 100%;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  background: #000800;
-  color: #fff;
-}
+	min-height: 100vh;
 
-div.list {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	margin: 0 auto;
-	padding: 8px;
-	width: 1600px;
-}
-
-div.card {
-	position: relative;
-	margin: 8px;
-	border: 1px solid #141;
-	border-radius: 4px;
-	background-color: #001000;
-	width: 500px;
-	text-align: center;
-}
-
-span.badge {
-	border: 1px solid #80ffff;
-	background-color: #80ffff44;
-	border-radius: 16px;
-	padding: 0px 4px;
-}
-
-div.card h2 {
-	font-size: 24px;
 	margin: 0;
+	padding: 40px 24px;
+
+	background: #000600;
+	background-attachment: fixed;
+
+	color: var(--text);
+
+	font-family:
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		"Noto Sans JP",
+		sans-serif;
 }
 
-div.card img {
-	width: 500px;
-	height: 300px;
-	margin-bottom: -4px;
+
+/* =================================
+   カタログ
+   ================================= */
+
+.catalog {
+	width: 100%;
+	max-width: 1600px;
+
+	margin: 0 auto;
+}
+
+
+/* =================================
+   3 × 2 グリッド
+   ================================= */
+
+.list {
+	display: grid;
+
+	grid-template-columns:
+		repeat(3, minmax(0, 1fr));
+
+	gap: 22px;
+
+	width: 100%;
+}
+
+
+/* =================================
+   カード
+   ================================= */
+
+.card {
+	display: block;
+
+	overflow: hidden;
+
+	border: 1px solid var(--border);
 	border-radius: 4px;
+
+	background: var(--card);
+
+	color: var(--text);
+	text-decoration: none;
+
+	transition:
+		border-color 0.15s ease,
+		background-color 0.15s ease,
+		box-shadow 0.15s ease;
 }
 
-div.card a::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
+
+/* 選択中 */
+
+.card:hover {
+	border-color: var(--border-hover);
+
+	background: var(--card-hover);
+}
+
+
+/* =================================
+   作品画像
+   ================================= */
+
+.card > img {
+	display: block;
+
+	width: 100%;
+	height: 270px;
+
+	object-fit: cover;
+
+	background: #080c16;
+
+	border: 0;
+
+	transition: filter 0.15s ease;
+}
+
+
+.card:hover > img {
+	filter: brightness(1.06);
+}
+
+
+/* =================================
+   作品情報
+   ================================= */
+
+.card-content {
+	padding: 15px 18px 17px;
+}
+
+
+.card-header {
+	display: flex;
+
+	align-items: center;
+	gap: 10px;
+
+	flex-wrap: wrap;
+}
+
+
+.card h2 {
+	margin: 0;
+
+	font-size: 21px;
+	font-weight: 600;
+
+	line-height: 1.35;
+	letter-spacing: 0.01em;
+
+	transition: color 0.15s ease;
+}
+
+
+.card:hover h2 {
+	color: var(--accent);
+}
+
+
+.card p {
+	margin: 9px 0 0;
+
+	color: var(--subtext);
+
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+
+/* =================================
+   バッジ
+   ================================= */
+
+.badge {
+	display: inline-block;
+
+	flex-shrink: 0;
+
+	padding: 2px 8px;
+
+	border: 1px solid #4faaaa;
+	border-radius: 12px;
+
+	background: #4faaaa44;
+	color: #6fdfdf;
+
+	font-size: 11px;
+	font-weight: 500;
+
+	line-height: 1.5;
+}
+
+
+.badge.member {
+	border: 1px solid #594eab;
+
+	background: #594eab44;
+	color: #9b9de8;
+}
+
+
+/* =================================
+   準備中カード
+   ================================= */
+
+.empty-card {
+	display: flex;
+
+	align-items: center;
+	justify-content: center;
+
+	height: 270px;
+
+	background:
+		repeating-linear-gradient(
+			135deg,
+			#101101,
+			#101101 12px,
+			#121112 12px,
+			#121112 24px
+		);
+
+	color: #658782;
+
+	font-size: 13px;
+	font-weight: 600;
+
+	letter-spacing: 0.15em;
+}
+
+
+.card:has(.empty-card) {
+	cursor: default;
+}
+
+
+.card:has(.empty-card):hover {
+	border-color: var(--border);
+
+	background: var(--card);
+
+	box-shadow:
+		0 4px 14px #00000030;
+}
+
+
+.card:has(.empty-card):hover h2 {
+	color: var(--text);
+}
+
+/* =================================
+   作品情報
+   ================================= */
+
+.card-content {
+	margin-top: -105px;
+
+	position: relative;
+	z-index: 1;
+
+	padding: 60px 18px 17px;
+
+	background: linear-gradient(
+		to bottom,
+		transparent 0%,
+		#08201144 35%,
+		#082011af 50%,
+		#082011ef 70%,
+		#082011 80%,
+		#061006 100%
+	);
+}
+
+
+.card-header {
+	display: flex;
+
+	align-items: center;
+	gap: 10px;
+
+	flex-wrap: wrap;
+}
+
+
+.card h2 {
+	margin: 0;
+
+	font-size: 21px;
+	font-weight: 600;
+
+	line-height: 1.35;
+	letter-spacing: 0.01em;
+
+	transition: color 0.15s ease;
+}
+
+
+.card:hover h2 {
+	color: var(--accent);
+}
+
+
+.card p {
+	margin: 9px 0 0;
+
+	color: var(--subtext);
+
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+
+
+/* =================================
+   アニメーションを減らす設定
+   ================================= */
+
+@media (prefers-reduced-motion: reduce) {
+	.card,
+	.card > img,
+	.card h2 {
+		transition: none;
+	}
 }
