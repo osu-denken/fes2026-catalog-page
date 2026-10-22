@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #000800;
+  color: #fff;
+}
+
+div.list {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	margin: 0 auto;
+	padding: 8px;
+	width: 1600px;
+}
+
+div.card {
+	position: relative;
+	margin: 8px;
+	border: 1px solid #141;
+	border-radius: 4px;
+	background-color: #001000;
+	width: 500px;
+	text-align: center;
+}
+
+span.badge {
+	border: 1px solid #80ffff;
+	background-color: #80ffff44;
+	border-radius: 16px;
+	padding: 0px 4px;
+}
+
+div.card h2 {
+	font-size: 24px;
+	margin: 0;
+}
+
+div.card img {
+	width: 500px;
+	height: 300px;
+	margin-bottom: -4px;
+	border-radius: 4px;
+}
+
+div.card a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
